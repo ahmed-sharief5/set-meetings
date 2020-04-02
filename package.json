@@ -1,0 +1,18 @@
+{
+  "name": "set-meetings",
+  "version": "1.0.0",
+  "description": "application to invite for meetings",
+  "main": "app.js",
+  "repository": "https://github.com/ahmed-sharief5/set-meetings.git",
+  "author": "Ahmed Sharief <shariefeng05@gmail.com.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
