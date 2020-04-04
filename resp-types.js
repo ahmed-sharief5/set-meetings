@@ -9,8 +9,7 @@ module.exports.result = {
 	EMAIL_EXISTS: 1, // Email already exists
 	USER_NOT_EXISTS: 2, // User not exists
 	USER_EXISTS: 3, // User exists
-	USER_PASSWORD_INCORRECT: 4, // Password is wrong
-    VALUE_NULL: 5,
+	USER_CREDENTIALS_INCORRECT: 4, // Password is wrong
     
     /*** HTTP Status codes ***/
     SUCCESS: 200,

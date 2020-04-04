@@ -3,7 +3,7 @@
 "esversion:6";
 
 const sMTypes = require("../resp-types");
-const dbConnection = require("../helpers/db-helper");
+const dbConnection = require("../db");
 const config = require("../config");
 const logger = require('../helpers/utility').logger;
 const SMResponse = sMTypes.sMResponse;
@@ -12,7 +12,6 @@ let resp;
 const sendResponseData = (result,data,response) => {
     resp = new SMResponse(result,data);
     response.status(200).send(resp);
-    return data;
 };
 
 const sendCustomError = (result, response) => {
@@ -26,11 +25,10 @@ const sendUnhandledError = (e,res) => {
     return new Promise((resolve, reject)=>resolve())
     .then(()=>{
         if(config.app.appStage)	{
-            console.error("::::::::::::::::::: Base controller Error :::::::::::::::::::::: \n"+error.stack);
-            resp = new SMResponse(sMTypes.result.SERVER_ERROR,error.stack);
+            console.error("::::::::::::::::::: Base controller Error :::::::::::::::::::::: \n"+error);
         }
-        else
-            resp = new SMResponse(sMTypes.result.SERVER_ERROR,"");
+        
+        resp = new SMResponse(sMTypes.result.SERVER_ERROR,error);
         
         response.status(500).send(resp);
         _processShutDown(error);
@@ -46,21 +44,10 @@ const _processShutDown = (error) => {
     // Send email to the System Admin
     logger.log('info', 'Base Controller Error::::: ErrorMessage : %s,::::: ErrorStack : %s', error.message, error.stack);
     
-    if(config.envType != 'Development'){
-        mail.sendErrorMail("<b style='color:orange,font-size:17px'>Base Controller Error</b><br/><br/><b style='color:red'>Error Message : </b>"+error.message+"<br/><br/><B style='color:red'>Stack Trace : </b>"+error.stack+"<br/><br/>")
-        .then((result)=>{
-            dbConnection.closeConnection();
-            setTimeout(function(){
-                process.exit(1);
-            },1000);
-        })
-    }
-    else{
-        dbConnection.closeConnection();
-        setTimeout(function(){
-            process.exit(1);
-        },1000);
-    }
+    dbConnection.closeConnection();
+    setTimeout(function(){
+        process.exit(1);
+    },1000);
 };
 
 
