@@ -8,14 +8,12 @@ module.exports.database = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
         poolSize: 2,
         keepAlive: 300000,
         connectTimeoutMS: 30000,
-        autoReconnect: true,
-        reconnectTries: 300000,
-        reconnectInterval: 5000,
-		user: '',
-		pass: ''
+		user: 'ahmed',
+		pass: 'ahmed'
 	}
 };
 
@@ -23,3 +21,7 @@ module.exports.app = {
 	appStage: true, // true for development and false for live
 	port: process.env.PORT || 5000
 };
+
+module.exports.secret = {
+    jwt_secret: "secret"
+}

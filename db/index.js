@@ -44,5 +44,8 @@ const db = {
   }
 }
 
+module.exports = {
+  User: require('../models/user-schema')
+};
 
 module.exports.db = db;

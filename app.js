@@ -10,13 +10,13 @@ const bodyParser = require("body-parser");
 const config = require("./config");
 const db = require("./db").db;
 const dbConnection = require("./db");
-const routes = require("./routes/routes");
+const routes = require("./routes/api-routes");
 const logger = require("./helpers/utility").logger;
 
 if (cluster.isMaster){
     // Count the machine's CPUs
   const CPUcount = require('os').cpus().length; 
-  for(let i=0; i<CPUcount; i++)  // Create a worker for each CPU
+  for(let i=0; i<1; i++)  // Create a worker for each CPU
         cluster.fork();  
 }
 else {
@@ -39,8 +39,19 @@ else {
 		response.header('Access-Control-Max-Age', '1209600');
 		next();
     });
+
+    // Server starts listening!!
+
+    let server = app.listen(config.app.port);
+    server.timeout = 60000;
+    if(config.app.appStage){
+        console.log('Set Meetings services are started!!! Running on %d',config.app.port);
+    }
+
+    // Connect to Mongo
+    db.connect(config.database.url, config.database.options);
     
-    app.use('/', routes);
+    app.use('/api/v1', routes);
 
     //development error handler
 	app.use(function(err, req, res, next) {
@@ -51,21 +62,11 @@ else {
 		logger.log('error', 'Seviour Error::::: ErrorMessage : %s,::::: ErrorStack : %s,::::: ErrorNumber : %s', err.message, err.stack, err.errno);		
 	    res.status(500);
 	    res.end(err.message);
-	    
-	    if(config.envType != 'Development'){
-		    mail.sendErrorMail("<b style='color:orange,font-size:17px'>Seviour Error</b><br/><br/><b style='color:red'>Error Message : </b>"+error.message+"<br/><br/><B style='color:red'>Stack Trace : </b>"+error.stack+"<br/><br/>")
-		    .then((result)=>{
-		    	dbConnection.closeConnection();
-				setTimeout(function(){
-					process.exit(1);
-				},1000);
-		    });
-	    }else{
-	    	dbConnection.closeConnection();
-	    	setTimeout(function(){
-				process.exit(1);
-			},1000);
-	    }
+
+        dbConnection.closeConnection();
+        setTimeout(function(){
+            process.exit(1);
+        },1000);
 	});
 
 }
