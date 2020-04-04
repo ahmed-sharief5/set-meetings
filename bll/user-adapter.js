@@ -42,7 +42,8 @@ async function registerUser(user) {
     }  
 }
 
-async function authenticate(inputEmailUsername, inputPassword) {
+async function authenticate(data) {
+    const { inputEmailUsername, inputPassword } = data;
     try{
         const user = await findUser(inputEmailUsername);
         if(user != null) {
@@ -64,7 +65,7 @@ async function authenticate(inputEmailUsername, inputPassword) {
         else{
             return {
                 code : respTypes.result.USER_NOT_EXISTS,
-                message: "Username or password is wrong"
+                message: "User not found"
             }
         }
         
