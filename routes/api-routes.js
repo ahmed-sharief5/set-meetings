@@ -12,6 +12,11 @@ const meetingSlotController = require("../controllers/meeting-slot-controller");
 app.post('/registerUser', userController.registerUser);
 
 /** Meeting Slot Routes **/
-app.post('/defineUseSlot', meetingSlotController.userDefiningSlots);
+app.post('/defineUserSlot', basicAuth, meetingSlotController.userDefiningSlots);
+app.get('/getAllMeetings', basicAuth, meetingSlotController.getAllMeetings);
+
+/** Booking Slot Routes **/
+app.post('/bookUserSlot', basicAuth, meetingSlotController.userBookingSlot);
+app.get('/getAllMyBookings', basicAuth, meetingSlotController.getAllMyBookings);
 
 module.exports = app;
