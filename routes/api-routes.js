@@ -10,7 +10,6 @@ const meetingSlotController = require("../controllers/meeting-slot-controller");
 
 /**  User Routes **/
 app.post('/registerUser', userController.registerUser);
-app.post('/authenticate', userController.authenticate);
 
 /** Meeting Slot Routes **/
 app.post('/defineUseSlot', meetingSlotController.userDefiningSlots);
