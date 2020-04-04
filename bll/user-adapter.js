@@ -32,7 +32,6 @@ async function registerUser(user) {
             newUser.password = bcrypt.hashSync(user.password, 10);
         }
         const registeredUser = await newUser.save();
-        const token = await generateToken({ email: user.email });
 
         const { username, email } = registeredUser;
         return { username, email }
@@ -47,13 +46,10 @@ async function authenticate(data) {
     try{
         const user = await findUser(inputEmailUsername);
         if(user != null) {
-            const { username, email, firstName, lastName, password } = user;
+            const { username, email, password } = user;
 
-            if (user && bcrypt.compareSync(inputPassword, password)) {
-
-                const token = await generateToken({ email: user.email });
-                
-                return {username, email, firstName, lastName};
+            if (user && bcrypt.compareSync(inputPassword, password)) {                
+                return {username, email};
             }
             else{
                 return {
