@@ -46,10 +46,10 @@ async function authenticate(data) {
     try{
         const user = await findUser(inputEmailUsername);
         if(user != null) {
-            const { username, email, password } = user;
+            const { username, password, _id } = user;
 
             if (user && bcrypt.compareSync(inputPassword, password)) {                
-                return {username, email};
+                return { username, _id };
             }
             else{
                 return {
