@@ -45,7 +45,9 @@ const db = {
 }
 
 module.exports = {
-  User: require('../models/user-schema')
+  User: require('../models/user-schema'),
+  MeetingSlot: require('../models/meeting-slots-schema'),
+  Bookings: require('../models/bookings-schema')
 };
 
 module.exports.db = db;
