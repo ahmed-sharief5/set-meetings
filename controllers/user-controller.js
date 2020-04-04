@@ -22,14 +22,4 @@ exports.registerUser = async function registerUser(req, res) {
     }   
 }
 
-exports.authenticate = async function authenticate(req, res) {
-    const { emailUsername, password } = req.body
-    try{
-        const userResp = await userAdapter.authenticate(emailUsername, password);
-        baseController.sendResponseData(respTypes.result.SUCCESS, userResp, res);
-    }
-    catch (err) {
-        baseController.sendUnhandledError({ error : err.message },res)
-    }   
-}
 

@@ -3,7 +3,7 @@
 "esversion:6";
 
 const app = require("express").Router();
-const accessMiddleware = require("../middleware/access");
+const accessMiddleware = require("../middleware/basic-auth");
 
 const userController = require("../controllers/user-controller");
 const meetingSlotController = require("../controllers/meeting-slot-controller");
