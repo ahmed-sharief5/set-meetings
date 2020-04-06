@@ -8,6 +8,13 @@ const basicAuth = require("../middleware/basic-auth");
 const userController = require("../controllers/user-controller");
 const meetingSlotController = require("../controllers/meeting-slot-controller");
 
+/** Healthcheck api **/
+app.get('/healthcheck', (req, res, next) => {
+    res.status(200).send({
+        message: "Server is up and running"
+    }) 
+})
+
 /**  User Routes **/
 app.post('/registerUser', userController.registerUser);
 

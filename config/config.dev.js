@@ -18,7 +18,7 @@ module.exports.database = {
 };
 
 module.exports.app = {
-	appStage: false, // true for development and false for live
+	appStage: true, // true for development and false for live
 	port: process.env.PORT || 5000
 };
 
