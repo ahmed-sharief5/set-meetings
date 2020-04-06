@@ -5,6 +5,24 @@
 const config = require('../config');
 const db = require('../db');
 const { MeetingSlot, Bookings } = db;
+const events = require("../services/events");
+
+const MEETING_TIME = 60; // in minutes
+
+function combineDateTime(date, time, add){
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    const dateTime = new Date(`${year}-${month}-${day} ${time}`)
+
+    if(add){
+        return new Date(dateTime.setMinutes(dateTime.getMinutes() + MEETING_TIME));
+    }
+    else{
+        return dateTime;
+    }
+}
 
 async function findSlotsData(date, user_id){
     try{
@@ -66,7 +84,7 @@ async function userDefiningSlots(data, userId){
 }
 
 async function userBookingSlot(data, userId){
-    const { date, time, comment, attendees, book_with } = data;
+    const { date, time, comment, attendees, book_with, summary, description } = data;
     try{
         const bookingSlot = new Bookings({ ...data });
         const bookWithSlotsData = await findSlotsData(date, book_with);
@@ -85,7 +103,7 @@ async function userBookingSlot(data, userId){
                     const removeTime = bookWithSlotsData.available.splice(indexOfTime, 1);
                     const booked_data = {
                         time: removeTime[0],
-                        time_zone: "IST",
+                        time_zone: "GMT",
                         booking_id: bookingSlot._id
                     }
                     bookWithSlotsData.booked.push(booked_data);
@@ -96,17 +114,38 @@ async function userBookingSlot(data, userId){
                 }
             });
 
-            if(bookingSlotData != null){
-                await Bookings.updateOne({ 'date': new Date(date) }, {$set : {'attendees': attendees, 'booked_slot':bookingSlot.booked_slot, 'comment': comment }}, { upsert: false, multi: false }).exec();
-            }
-            else{
-                await bookingSlot.save();
-            }
-            await MeetingSlot.updateOne({ 'date': new Date(date) }, {$set : {'available': bookWithSlotsData.available, 'booked':bookWithSlotsData.booked }}, { upsert: false, multi: false }).exec();
+            // if(bookingSlotData != null){
+            //     await Bookings.updateOne({ 'date': new Date(date) }, {$set : {'attendees': attendees, 'booked_slot':bookingSlot.booked_slot, 'comment': comment }}, { upsert: false, multi: false }).exec();
+            // }
+            // else{
+            //     await bookingSlot.save();
+            // }
+            // await MeetingSlot.updateOne({ 'date': new Date(date) }, {$set : {'available': bookWithSlotsData.available, 'booked':bookWithSlotsData.booked }}, { upsert: false, multi: false }).exec();
+
+            bookWithSlotsData.booked.map(async (event) => {
+                const eventDate = bookWithSlotsData.date;
+
+                const eventData = {
+                    summary: data.summary,
+                    description: data.description,
+                    startTime: {
+                        time: combineDateTime(eventDate, event.time, false),
+                        timeZone: event.time_zone
+                    },
+                    endTime: {
+                        time: combineDateTime(eventDate, event.time, true),
+                        timeZone: event.time_zone
+                    }
+                }
+                await events.addEvents(eventData);
+            });
 
             return {
                 booking_id: bookingSlot._id,
-                booked_at: bookWithSlotsData.booked
+                booked_at: {
+                    date: bookWithSlotsData.date,
+                    time: bookWithSlotsData.booked
+                }
     
             };    
         }

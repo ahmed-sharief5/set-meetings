@@ -1,3 +1,4 @@
 node_modules/**
 Errorlog/**
 yarn-error.log
+credentials/**
