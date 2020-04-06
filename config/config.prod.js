@@ -3,7 +3,7 @@
 "esversion:6";
 
 module.exports.database = {
-	url: 'mongodb://localhost/set-meetings',
+	url: process.env.MONGODB_URI,
 	options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -11,9 +11,7 @@ module.exports.database = {
         useCreateIndex: true,
         poolSize: 2,
         keepAlive: 300000,
-        connectTimeoutMS: 30000,
-		user: '',
-		pass: ''
+        connectTimeoutMS: 30000
 	}
 };
 
