@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "application to invite for meetings",
   "main": "app.js",
+  "scripts": {
+    "start": "SET NODE_ENV=dev && node app.js",
+    "test": "mocha --timeout 10000"
+  },
   "repository": "https://github.com/ahmed-sharief5/set-meetings.git",
   "author": "Ahmed Sharief <shariefeng05@gmail.com.com>",
   "license": "MIT",
@@ -15,6 +19,9 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.1"
   }
 }
