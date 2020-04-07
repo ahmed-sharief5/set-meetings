@@ -16,7 +16,7 @@ const logger = require("./helpers/utility").logger;
 if (cluster.isMaster){
     // Count the machine's CPUs
   const CPUcount = require('os').cpus().length; 
-  for(let i=0; i<1; i++)  // Create a worker for each CPU
+  for(let i=0; i<CPUcount; i++)  // Create a worker for each CPU
         cluster.fork();  
 }
 else {
