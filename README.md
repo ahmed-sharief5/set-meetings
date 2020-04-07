@@ -4,6 +4,8 @@
 2. `node app.js` or `nodemon`
 3. In **config-dev.js/config.prod.js** add **username** and **password** for mongodb database.
 
+### Download postman collection from <a download="Meeting_App.postman_collection.json" href="../postman_collection" title="Meeting App Postman Collection">Here</a>
+
 
 #### Naming conventions used in application
 
