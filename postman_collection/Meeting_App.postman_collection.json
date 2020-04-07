@@ -46,15 +46,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://13.233.150.194:5000/api/v1/registerUser",
+					"raw": "http://{{meeting_app_server}}/api/v1/registerUser",
 					"protocol": "http",
 					"host": [
-						"13",
-						"233",
-						"150",
-						"194"
+						"{{meeting_app_server}}"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -108,15 +104,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://13.233.150.194:5000/api/v1/defineUserSlot",
+					"raw": "http://{{meeting_app_server}}/api/v1/defineUserSlot",
 					"protocol": "http",
 					"host": [
-						"13",
-						"233",
-						"150",
-						"194"
+						"{{meeting_app_server}}"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -200,15 +192,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://13.233.150.194:5000/api/v1/bookUserSlot",
+					"raw": "http://{{meeting_app_server}}/api/v1/bookUserSlot",
 					"protocol": "http",
 					"host": [
-						"13",
-						"233",
-						"150",
-						"194"
+						"{{meeting_app_server}}"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"v1",
