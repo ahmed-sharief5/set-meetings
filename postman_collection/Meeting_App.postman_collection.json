@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "5eca4955-30e0-4b53-84ae-a1b35ce048ec",
+		"name": "Meeting App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register a user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "shariefdeveloper@gmail.com",
+							"description": "Enter unique  email",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "ahmedshariefuser",
+							"description": "Enter  unique username",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ahmedsharief",
+							"description": "Enter your password",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.233.150.194:5000/api/v1/registerUser",
+					"protocol": "http",
+					"host": [
+						"13",
+						"233",
+						"150",
+						"194"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"registerUser"
+					]
+				},
+				"description": "Api to register or create a user to setup meetings"
+			},
+			"response": []
+		},
+		{
+			"name": "Defining user slot",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ahmedsharief",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ahmed",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "date",
+							"value": "2020-04-09",
+							"description": "Enter the date at which the user need to define his free slot",
+							"type": "text"
+						},
+						{
+							"key": "time",
+							"value": "[\"09:00:00\", \"10:00:00\", \"11:00:00\", \"12:00:00\", \"13:00:00\"]",
+							"description": "Array of time to have wrapped data in a single place",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.233.150.194:5000/api/v1/defineUserSlot",
+					"protocol": "http",
+					"host": [
+						"13",
+						"233",
+						"150",
+						"194"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"defineUserSlot"
+					]
+				},
+				"description": "Api to define user slot to show when the user is available for meeting"
+			},
+			"response": []
+		},
+		{
+			"name": "Booking User SLot",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ahmed1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ahmedsharief1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "date",
+							"value": "2020-04-09",
+							"description": "Enter the date at which the user need to define his free slot",
+							"type": "text"
+						},
+						{
+							"key": "time",
+							"value": "[\"09:00:00\"]",
+							"description": "Array of time to have wrapped data in a single place",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "",
+							"description": "Comment is its there any",
+							"type": "text"
+						},
+						{
+							"key": "attendees",
+							"value": "[]",
+							"description": "Array of users who will be attending the meeting",
+							"type": "text"
+						},
+						{
+							"key": "book_with",
+							"value": "5e8b06ba9e93e6632d710093",
+							"description": "User id with whom meeting will be fixed",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Skype Discussion",
+							"description": "Summary/ Subject of the dicsussion",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Technical discussion as you have gone through the assignment round",
+							"description": "Description of the discussion",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.233.150.194:5000/api/v1/bookUserSlot",
+					"protocol": "http",
+					"host": [
+						"13",
+						"233",
+						"150",
+						"194"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"bookUserSlot"
+					]
+				},
+				"description": "Api to book meeting with other user based on available time"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all my bookings",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ahmed1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ahmedsharief1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://13.233.150.194:5000/api/v1/getAllMyBookings",
+					"protocol": "http",
+					"host": [
+						"13",
+						"233",
+						"150",
+						"194"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"getAllMyBookings"
+					]
+				},
+				"description": "Api to get all bookings/set up meeting with the other person"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all meetings",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ahmed",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ahmedsharief",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://13.233.150.194:5000/api/v1/getAllMeetings",
+					"protocol": "http",
+					"host": [
+						"13",
+						"233",
+						"150",
+						"194"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"getAllMeetings"
+					]
+				},
+				"description": "Api to get all meetings set up by other person"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
