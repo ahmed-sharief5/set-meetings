@@ -3,8 +3,9 @@
 1. `npm install`
 2. `node app.js` or `nodemon`
 3. In **config-dev.js/config.prod.js** add **username** and **password** for mongodb database.
+4. Go to this url `https://localhost:5000/healthcheck` to check the server is up and running.
 
-### Download postman collection from <a download="Meeting_App.postman_collection.json" href="../postman_collection" title="Meeting App Postman Collection">Here</a>
+### Download postman collection from [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a0634e675c234ce783c4)
 
 
 #### Naming conventions used in application
