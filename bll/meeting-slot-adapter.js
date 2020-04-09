@@ -114,13 +114,13 @@ async function userBookingSlot(data, userId){
                 }
             });
 
-            // if(bookingSlotData != null){
-            //     await Bookings.updateOne({ 'date': new Date(date) }, {$set : {'attendees': attendees, 'booked_slot':bookingSlot.booked_slot, 'comment': comment }}, { upsert: false, multi: false }).exec();
-            // }
-            // else{
-            //     await bookingSlot.save();
-            // }
-            // await MeetingSlot.updateOne({ 'date': new Date(date) }, {$set : {'available': bookWithSlotsData.available, 'booked':bookWithSlotsData.booked }}, { upsert: false, multi: false }).exec();
+            if(bookingSlotData != null){
+                await Bookings.updateOne({ 'date': new Date(date) }, {$set : {'attendees': attendees, 'booked_slot':bookingSlot.booked_slot, 'comment': comment }}, { upsert: false, multi: false }).exec();
+            }
+            else{
+                await bookingSlot.save();
+            }
+            await MeetingSlot.updateOne({ 'date': new Date(date) }, {$set : {'available': bookWithSlotsData.available, 'booked':bookWithSlotsData.booked }}, { upsert: false, multi: false }).exec();
 
             bookWithSlotsData.booked.map(async (event) => {
                 const eventDate = bookWithSlotsData.date;
